@@ -27,7 +27,7 @@ for(x;x<4;x++) {
 printf ("\n");
    
 }
- for(a;a<22;a++) {
+ for(a;a<21;a++) {
     printf("#") ;}
     printf("\n") ;
 

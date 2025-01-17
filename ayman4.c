@@ -1,11 +1,24 @@
-    #include <stdio.h>
-    int main () {
+#include <stdio.h>
+int main () {
 
 
-    int i;
-    int x;
-    printf (" please: just writte the two numbers that need to be subtracted or added to each other's \n");
-    scanf("%d",&i);
-    scanf("%d",&x);
-    printf("%d",x+i);
-        return(0);}
+float i;
+float x;
+int y;
+int z ;
+
+printf (" please:  writte the first number \n");
+ 
+ y = scanf("%f",&i);
+if(y != 1){
+    printf("error : you have used a letter \n"); return (1);
+}
+ printf ("writte the next number \n");
+
+z = scanf("%f",&x);
+if(z != 1){
+    printf("error : you have used a letter \n ") ; return (1);
+}
+printf (" the result is :  %f\n",i+x);
+ return(0);
+}

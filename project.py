@@ -2,23 +2,23 @@ class Hospital:
     all_doctors ={}
     appointments={}
 
-    def __init__(self, name,specializion, appointment):
+    def __init__(self, name,specialize, appointment):
         self.name = name
-        self.specializion = specializion
+        self.specialize = specialize
         self.appointment = appointment
-        Hospital.all_doctors[self.name]=[self.specializion]
+        Hospital.all_doctors[self.name]=[self.specialize]
         Hospital.appointments[self.name]={}
 
     @classmethod
-    def get_doctors_by_specialzion (cls,specializion):
+    def get_doctors_by_specialize(cls,specialize):
         x=[]
         for i in cls.all_doctors.values():
-            if i==specializion:
+            if i==specialize:
                 x.append(str(i))
-                print(f"the doctors who specialize at {cls.specializion} are {str(x)}")
+                print(f"the doctors who specialize at {cls,specialize} are {str(x)}")
 
     @classmethod
-    def book (cls,doctor_name,time,patient_name  ):
+    def book (cls,doctor_name,time,patient_name):
         while True:
             try:
                 s=int(time)
@@ -48,17 +48,24 @@ class Hospital:
 
     @classmethod
     def view (cls,doctor_name):
-        for i in Hospital.appointments:
-            if i==doctor_name:
-                print(f"{Hospital.appointments[i]} have appointments at {Hospital.appointments[i].values()}")
+        if doctor_name  not in Hospital.appointments:
+            print(f"the name {doctor_name} is not found")
+            return
+        else:
+            for i in Hospital.appointments:
+                if i==doctor_name:
+                    print(f"{Hospital.appointments[i]} have appointments at {Hospital.appointments[i].values()}")
 
     @classmethod
     def available(cls,time):
         x = []
         for i in Hospital.appointments:
-            if Hospital.appointments[i].values()!=time :
+            if Hospital.appointments[i].values()!= time :
                 x.append(Hospital.appointments[i])
-        print(x)
+        print(f"the doctors who are free are {x}")
+
+    def __str__(self):
+        print(f"{self.name} from {self.specialize}")
 
 
 

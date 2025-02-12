@@ -53,11 +53,10 @@ class Hospital:
 
     @classmethod
     def book(cls):
-        print(f"{Hospital.appointments}")
+#        print(f"{Hospital.appointments}")
         name =(input("please enter doctor name"))
         z=(input("enter the patient name"))
         s=int(input("time (24 hours)"))
-        print(name)
         if s >24 or s<0:
             print("you have entered a wrong time")
             return

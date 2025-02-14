@@ -10,8 +10,11 @@ class Hospital:
 
     @classmethod
     def add_doctor(cls):
-        name = str(input("Enter the doctor's name: "))
+        name = input("Enter the doctor's name: ")
         specialize = str(input("Enter his specializtion: "))
+        if not all(char.isalpha() or char.isspace() for char in name and specialize):
+            print("the patient name should not contain anything except letters")
+            return
         if name in cls.all_doctors:
             print("This doctor is already in the system")
 
@@ -28,15 +31,17 @@ class Hospital:
     @classmethod
     def get_doctors_by_specialize(cls):
         d = []
-        specialize = str(input("Enter the specialzation: "))
-
+        specialize = input("Enter the specialzation: ")
+        if not all(char.isalpha() or char.isspace()for char in specialize):
+            print("the patient name should not contain anything except letters")
+            return
         for doctor_name, specialization in Hospital.all_doctors.items():
             if specialization[0] == specialize:
                 d.append(doctor_name)
-        if d:
+        if d != "":
             print(f"the doctors who specialize at {str(specialize)} are {d}")
         else:
-            print("not found")
+            print(f"the {specialize} specializion is not found")
         return
 
     def __str__(self):
@@ -44,7 +49,10 @@ class Hospital:
 
     @classmethod
     def view(cls):
-        doctor_name = str(input("Enter doctor name: "))
+        doctor_name = input("Enter doctor name: ")
+        if not all(char.isalpha() or char.isspace() for char in doctor_name):
+            print("the patient name should not contain anything except letters")
+            return
         if doctor_name not in cls.appointments:
             print(f"the name {str(doctor_name)} is not found !")
             return
@@ -60,7 +68,15 @@ class Hospital:
     def book(cls):
         name = (input("please enter doctor name: "))
         patient = (input("enter the patient name: "))
-        time = int(input("time (24 hours): "))
+        time = int(input("time (regardless of the min ): "))
+        if not all(char.isalpha() or char.isspace()for char in name and patient):
+            print("the patient name should not contain anything except letters")
+            return
+        try:
+            time=int(time)
+        except ValueError:
+            print("the time should not contain anything except numbers and without min")
+            return
         if time > 24 or time < 0:
             print("you have entered a wrong time !")
             return
@@ -86,10 +102,11 @@ print("welcome in our hospital \n how can we assist you today")
 print("choose a munber for what you like to do : \n 1_ add a doctor")
 print("2_if you want to see all of our doctors \n3_ if you want all doctors who work in a specialization")
 print("4_ if you want to book\n5_if you want to view doctors plans")
+print("if you want to exit just say exit")
 while True:
     try:
         x = input()
-        if x == "stop":
+        if x == "exit":
             break
         x = int(x)
         if x == 1:

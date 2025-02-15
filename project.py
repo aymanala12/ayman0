@@ -61,7 +61,7 @@ class Hospital:
             if len(appointments) == 0:
                 print(f"Dr.{str(doctor_name)} has no appointments.")
             else:
-                print(f"Dr.{str(doctor_name)} has appointments are {Hospital.appointments}")
+                print(f"Dr.{str(doctor_name)} has appointments are {Hospital.appointments[doctor_name]}")
                 return
 
     @classmethod
@@ -70,7 +70,7 @@ class Hospital:
         patient = (input("enter the patient name: "))
         time = int(input("time (regardless of the min ): "))
         if not all(char.isalpha() or char.isspace()for char in name and patient):
-            print("the patient name should not contain anything except letters")
+            print("the name should not contain anything except letters")
             return
         try:
             time=int(time)
@@ -80,17 +80,18 @@ class Hospital:
         if time > 24 or time < 0:
             print("you have entered a wrong time !")
             return
-        if name not in cls.appointments:
+        if name not in Hospital.appointments :
             print("You have entered a wrong doctor name. please try again!")
-        for i in cls.appointments[name]:
-            if i[1] == time:
-                print("Sorry!, doctor has another patient in this time.")
-                return
-        if len(cls.appointments[name]) == 0 or len(cls.appointments[name]) < 3:
-            cls.appointments[name].append((patient, time))
-            print(f"{patient} will have an appointment at {time} with Dr. {name}")
-        else:
-            print("the doctor time taple is full")
+        for i,z in Hospital.appointments.items():
+            if i == name:
+                if z[1] == time:
+                    print("Sorry!, doctor has another patient in this time.")
+                    return
+                if len(cls.appointments[name]) == 0 or len(cls.appointments[name]) < 3:
+                    cls.appointments[name].append((patient, time))
+                    print(f"{patient} will have an appointment at {time} with Dr. {name}")
+                else:
+                    print("the doctor time taple is full")
 
 
 doctor1 = Hospital("ahmed", "sss")
@@ -120,6 +121,6 @@ while True:
         elif x == 5:
             Hospital.view()
         elif x > 5:
-            print("you have chosen a wrong option,please try again")
+            print("you have chosen a number more than 5 ")
     except ValueError:
-        print("you have entered a wrong option, please try again")
+        print("error, you should use numbers from 1 to 5 unless you want to exit write exit ")

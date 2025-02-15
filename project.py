@@ -75,23 +75,23 @@ class Hospital:
         try:
             time=int(time)
         except ValueError:
-            print("the time should not contain anything except numbers and without min")
+            print("the time should be numbers and without min")
             return
         if time > 24 or time < 0:
             print("you have entered a wrong time !")
             return
-        if name not in Hospital.appointments :
+        if name not in cls.appointments:
             print("You have entered a wrong doctor name. please try again!")
-        for i,z in Hospital.appointments.items():
-            if i == name:
-                if z[1] == time:
-                    print("Sorry!, doctor has another patient in this time.")
-                    return
-                if len(cls.appointments[name]) == 0 or len(cls.appointments[name]) < 3:
-                    cls.appointments[name].append((patient, time))
-                    print(f"{patient} will have an appointment at {time} with Dr. {name}")
-                else:
-                    print("the doctor time taple is full")
+            return
+        for i in cls.appointments[name]:
+            if i[1] == time:
+                print("Sorry!, doctor has another patient in this time.")
+                return
+        if len(cls.appointments[name]) == 0 or len(cls.appointments[name]) < 3:
+            cls.appointments[name].append((patient, time))
+            print(f"{patient} will have an appointment at {time} with Dr. {name}")
+        else:
+            print("the doctor time taple is full")
 
 
 doctor1 = Hospital("ahmed", "sss")

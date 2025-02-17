@@ -11,17 +11,21 @@ class Hospital:
     @classmethod
     def add_doctor(cls):
         name = input("Enter the doctor's name: ")
-        specialize = str(input("Enter his specializtion: "))
+        specialize = input("Enter his specializtion: ")
+        if not all(char.isalpha() or char.isspace()for char in specialize or name):
+            print("the name should not contain anything except letters")
+            return
         if not all(char.isalpha() or char.isspace() for char in name and specialize):
             print("the patient name should not contain anything except letters")
             return
         if name in cls.all_doctors:
             print("This doctor is already in the system")
-
         else:
             cls.all_doctors[name] = [specialize]
             cls.appointments[name] = []
             print("the doctor has been added succefully")
+
+
 
     @classmethod
     def get_all_doctors(cls):
@@ -33,7 +37,7 @@ class Hospital:
         d = []
         specialize = input("Enter the specialzation: ")
         if not all(char.isalpha() or char.isspace()for char in specialize):
-            print("the patient name should not contain anything except letters")
+            print("the specializion should not contain anything except letters")
             return
         for doctor_name, specialization in Hospital.all_doctors.items():
             if specialization[0] == specialize:
